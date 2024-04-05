@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron'),
+const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron'),
     path = require('node:path'),
     utils = require(path.join(__dirname, 'js/file-utils.js')),
     { cleanTemplate } = require(path.join(__dirname, 'js/cleanTemplate.js')),
@@ -245,7 +245,7 @@ async function handleDataProyecto (evt, nombre, fpath)
 async function handleAbrirDirPry (evt, nombre)
 {
     const ppath = path.join(buildpath, nombre);
-    await utils.openFile(ppath);
+    await shell.openPath(ppath);
 }
 
 async function handleBorrarProyecto (evt, nombre)
