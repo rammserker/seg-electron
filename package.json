@@ -1,0 +1,33 @@
+{
+  "name": "seg-elect2",
+  "version": "0.6",
+  "description": "Generador de informes para SEG Ingeniería",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maximiliano Fernández",
+  "license": "ISC",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.3.1",
+    "@electron-forge/maker-deb": "^7.3.1",
+    "@electron-forge/maker-rpm": "^7.3.1",
+    "@electron-forge/maker-squirrel": "^7.3.1",
+    "@electron-forge/maker-zip": "^7.3.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.3.1",
+    "@electron-forge/plugin-fuses": "^7.3.1",
+    "adm-zip": "^0.5.10",
+    "decompress": "^4.2.1",
+    "electron": "^29.1.5",
+    "exceljs": "^4.3.0",
+    "jszip": "^3.10.1",
+    "sharp": "^0.31.3",
+    "xml2js": "^0.4.23"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
+  }
+}

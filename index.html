@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+        <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+        <title>
+            SEG Ingeniería - Generador de informes
+        </title>
+
+        <link rel="stylesheet" href="css/app.css">
+    </head>
+    <body>
+        <header>
+            <h1>
+                Generador de informes 
+                <span class="appversion"></span>
+            </h1>
+            <nav>
+                <button class="action" data-action="crearTemplate">Nuevo template</button>
+                <button class="action" data-action="nuevoProyecto">Nuevo proyecto</button>
+            </nav>
+        </header>
+
+        <main>
+        </main>
+
+        <footer>
+            Copyright Maximiliano Fernández para SEG Ingeniería 2023-2024
+        </footer>
+
+        <template class="tplproject">
+            <article>
+                <h2>Título Proyecto</h2>
+                <nav class="pry-actions">
+                    <button data-args="[]" data-action="abrirDirPry"
+                        data-mods="noawait">Abrir ubicación</button>
+                    <button class="danger" data-args="[]" data-action="borrarProyecto">
+                        Borrar proyecto
+                    </button>
+                </nav>
+                <dl>
+                    <dt>Fecha creación:</dt>
+                    <dd  class="ctime">
+                        <time datetime=""></time>
+                    </dd>
+                    <dt>Datos agregados:</dt>
+                    <dd class="dtime">
+                        <time datetime="">-</time>
+                        <button data-args="[]" data-action="dataProyecto">
+                            Agregar datos
+                        </button>
+                    </dd>
+                    <dt>Última compilación:</dt>
+                    <dd class="xtime">
+                        <time datetime="">-</time>
+                        <button data-args="[]" data-action="compilarProyecto">
+                            Compilar informe
+                        </button>
+                    </dd>
+                </dl>
+            </article>
+        </template>
+
+        <template class="tplalerta">
+            <dialog open>
+                <h2>Título</h2>
+                <p>Cuerpo</p>
+                <form method="dialog">
+                    <button>Aceptar</button>
+                </form>
+            </dialog>
+        </template>
+
+        <template class="prompt">
+            <dialog open>
+                <form method="dialog">
+                    <label>
+                        <input type="text">
+                    </label>
+
+                    <input type="reset" value="Cancelar">
+                    <input type="submit" value="Aceptar">
+                </form>
+            </dialog>
+        </template>
+
+        <script type="text/javascript" src="./renderer.js"></script>
+    </body>
+</html>

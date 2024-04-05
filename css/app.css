@@ -1,0 +1,201 @@
+:root
+{
+    --backdrop-clr: #000c;
+    --loader-siz: 10vmin;
+}
+
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
+
+html, body
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+
+    font-family: system-ui, sans-serif;
+
+    color: #fff;
+    background:
+        radial-gradient(black 15%, transparent 16%) 0 0,
+        radial-gradient(black 15%, transparent 16%) 8px 8px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+        radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+        background-color:#282828;
+        background-size:16px 16px;
+}
+
+header,
+footer
+{
+    text-align: center;
+    background-color: #222;
+    border-radius: 6px;
+    margin: 0 auto;
+    width: min(960px, 100% - 2rem);
+}
+
+h1
+{
+    margin: 0;
+}
+
+header nav
+{
+    padding: .4rem;
+}
+
+footer
+{
+    padding: .4rem;
+    font-size: .6rem;
+}
+
+main
+{
+    flex-grow: 1;
+    overflow-y: scroll;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+article
+{
+    background: #0006;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+article h2
+{
+    color: #fff;
+    background: #c00;
+    padding: .3rem 1rem;
+    margin: 0;
+}
+
+article nav
+{
+    margin: 0;
+    padding: 0;
+}
+
+dl > *
+{
+    margin: 0;
+}
+
+dt
+{
+    font-weight: bold;
+    margin: 1rem 0 0;
+    border-bottom: solid 1px
+}
+
+dd
+{
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    padding: .4rem 0;
+}
+
+button
+{
+    cursor: pointer;
+}
+
+@media(max-width: 1200px)
+{
+    main
+    {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+@media(max-width: 600px)
+{
+    main
+    {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Prompt ******/
+dialog
+{
+    position: fixed;
+    z-index: 1100;
+    top: 30vmin;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Loader ******/
+.working
+{
+    --this-siz: var(--loader-siz, 10vmin);
+}
+
+.working::before,
+.working::after
+{
+    content: "";
+
+    display: block;
+    position: fixed;
+}
+
+.working::before
+{
+    z-index: 999;
+    inset: 0;
+    background: var(--backdrop-clr, #000a);
+}
+
+.danger
+{
+    color: #fff;
+    background: linear-gradient(#f00, #c00);
+    font-weight: bold;
+}
+
+@keyframes rotacion
+{
+    to
+    {
+        transform: rotate(1turn);
+    }
+}
+
+.working::after
+{
+    z-index: 1000;
+    top: calc(50% - calc(var(--this-siz) / 2));
+    left: calc(50% - calc(var(--this-siz) / 2));
+
+    width: var(--this-siz);
+    height: var(--this-siz);
+    border: calc(var(--this-siz) / 10) solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    
+    animation: rotacion 1s linear infinite;
+}
