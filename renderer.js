@@ -129,6 +129,10 @@ const acciones = {
     {
         return window.segActions.abrirDirPry(nombre);
     },
+    abrirDirProyectos: async function ()
+    {
+        return window.segActions.abrirDirPry('');
+    },
     borrarProyecto: async function (nombre)
     {
         if (confirm(`¿Está seguro que quiere borrar el proyecto "${ nombre }"?`))
