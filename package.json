@@ -1,6 +1,6 @@
 {
   "name": "seg-elect2",
-  "version": "0.6",
+  "version": "0.0.6",
   "description": "Generador de informes para SEG Ingeniería",
   "main": "main.js",
   "scripts": {
