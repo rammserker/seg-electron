@@ -1,5 +1,6 @@
 const { readFile, writeFile, copyFile, access, readdir, rename } = require('fs/promises'),
     util = require('util'),
+    path = require('node:path'),
     process = require('process'),
     Parser = require('./utils/parser.js'),
     sharp = require('sharp'),
@@ -443,10 +444,10 @@ async function processProject (prjpath, datapath, outfile)
         {
             // Colores: #3063bc, #e76d19, #959595, #e9b900, #468dcc, #64a537, #1a3a73, #9a3d01
             const index = graficas.length,
-                image =  `graficas/grafica${ index }`;
+                image =  path.join(`graficas`,`grafica${ index }`);
                 graph = {
                     index, tipo, caption, datos, title, config,
-                    path: `${ imgpath }/${ image }.png`
+                    path: path.join(`${ imgpath }`,`${ image }.png`)
                 };
 
             graficas.push(graph);
@@ -456,7 +457,7 @@ async function processProject (prjpath, datapath, outfile)
 
         nimagen (path, caption = '', extension = 'png')
         {
-            path = `${ imgpath }/${ path }.${ extension }`;
+            path = path.join(`${ imgpath }`,`${ path }.${ extension }`);
 
             let retorno = `![${ caption }](${ path })`;
 
@@ -1062,7 +1063,7 @@ async function processProject (prjpath, datapath, outfile)
             tmpgraficas.push(resimg);
 
             // Copiar archivo a template de docx
-            await copyFile(grafica.path, `${ prjpath }/docx_tmp/word/media/${ resimg.imgProps.target }`);
+            await copyFile(grafica.path, path.join(`${ prjpath }`,`docx_tmp/word/media/${ resimg.imgProps.target }`));
         }
         catch (err)
         {
@@ -1078,7 +1079,7 @@ async function processProject (prjpath, datapath, outfile)
 
     // Agregar referencias a las imágenes
     const
-        reffile = await readFile(`${ prjpath }/docx_tmp/word/_rels/document.xml.rels`),
+        reffile = await readFile(path.join(`${ prjpath }`, `docx_tmp/word/_rels/document.xml.rels`)),
         refstr = await reffile.toString(),
         refxml = await xmlparser.parseStringPromise(refstr);
 
@@ -1117,7 +1118,7 @@ async function processProject (prjpath, datapath, outfile)
         });
     }
 
-    await writeFile(`${ prjpath }/docx_tmp/word/_rels/document.xml.rels`, xmlbuilder.buildObject(refxml));
+    await writeFile(path.join(`${ prjpath }`, `docx_tmp/word/_rels/document.xml.rels`, xmlbuilder.buildObject(refxml)));
 
     const embed = {
         imagenes: {},
