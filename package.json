@@ -24,8 +24,8 @@
     "electron": "^29.1.5",
     "exceljs": "^4.3.0",
     "jszip": "^3.10.1",
-    "sharp": "^0.31.3",
-    "xml2js": "^0.4.23"
+    "sharp": "^0.33.3",
+    "xml2js": "^0.6.2"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0"
