@@ -2,5 +2,3 @@ node_modules
 prueba_ast.json
 js/app.js
 project/docx_tmp/
-tmp/docx/
-tmp/tables/
