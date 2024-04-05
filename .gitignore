@@ -2,3 +2,4 @@ node_modules
 prueba_ast.json
 js/app.js
 project/docx_tmp/
+package-lock.json
