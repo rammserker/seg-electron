@@ -19,7 +19,8 @@
     "@electron-forge/maker-zip": "^7.3.1",
     "@electron-forge/plugin-auto-unpack-natives": "^7.3.1",
     "@electron-forge/plugin-fuses": "^7.3.1",
-    "electron": "^29.1.5"
+    "electron": "^29.1.5",
+    "sharp": "^0.33.3"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
