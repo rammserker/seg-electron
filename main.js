@@ -193,6 +193,11 @@ async function handleCrearTemplate (evt, tplpath)
         path.join(tplspath, 'template/tables'),
         true
     );
+
+    return {
+        ok: true,
+        msg: `Plantilla en base al archivo "${ tplname }" creada con éxito`
+    };
 }
 
 async function handleDataProyecto (evt, nombre, fpath)
