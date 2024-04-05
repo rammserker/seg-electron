@@ -32,6 +32,11 @@ async function mprompt (msg)
         el.remove();
     }
 
+    setTimeout(_ => {
+        console.log('Intentando hacer foco...');
+        input.focus();
+    }, 300);
+
     return new Promise ((resolve, reject) => {
         form.addEventListener('reset', evt => {
             evt.preventDefault();

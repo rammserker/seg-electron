@@ -142,10 +142,23 @@ button
 dialog
 {
     position: fixed;
-    z-index: 1100;
-    top: 30vmin;
-    left: 50%;
-    transform: translateX(-50%);
+    z-index: 1000;
+    top: 20vh;
+
+    background: #fffe;
+    border-radius: 6px;
+}
+
+dialog [type=text]
+{
+    display: block;
+    width: 100%;
+    margin-bottom: .4em;
+}
+
+dialog label
+{
+    font-size: 80%;
 }
 
 /* Loader ******/
@@ -165,7 +178,7 @@ dialog
 
 .working::before
 {
-    z-index: 999;
+    z-index: 200;
     inset: 0;
     background: var(--backdrop-clr, #000a);
 }
@@ -187,7 +200,7 @@ dialog
 
 .working::after
 {
-    z-index: 1000;
+    z-index: 300;
     top: calc(50% - calc(var(--this-siz) / 2));
     left: calc(50% - calc(var(--this-siz) / 2));
 
