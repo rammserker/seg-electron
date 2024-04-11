@@ -1022,6 +1022,7 @@ async function processProject (prjpath, datapath, outfile)
     // Y acá el horror: ejecución síncrona de un comando shell...
 
     console.log('Generando gráficas...'); // [', batchstr, ']');
+    console.log(`highcharts-export-server --batch "${ batchstr }"`);
     const execSync = require('child_process').execSync;
     execSync(`highcharts-export-server --batch "${ batchstr }"`);
     console.log('Fin de generación de gráficas');
@@ -1118,7 +1119,7 @@ async function processProject (prjpath, datapath, outfile)
         });
     }
 
-    await writeFile(path.join(`${ prjpath }`, `docx_tmp/word/_rels/document.xml.rels`, xmlbuilder.buildObject(refxml)));
+    await writeFile(path.join(`${ prjpath }`, 'docx_tmp/word/_rels/document.xml.rels', xmlbuilder.buildObject(refxml)));
 
     const embed = {
         imagenes: {},
