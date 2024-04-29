@@ -981,7 +981,7 @@ async function processProject (prjpath, datapath, outfile)
         // Copiar archivo a template de docx
         await copyFile(imagenpath, `${ prjpath }/docx_tmp/word/media/${ resimg.imgProps.target }`);
     }
-    console.log('>> Procesando imágenes 33');
+    // console.log('>> Procesando imágenes 33');
 
     console.log('>> Generando gráficas');
 
@@ -1119,7 +1119,7 @@ async function processProject (prjpath, datapath, outfile)
         });
     }
 
-    await writeFile(path.join(`${ prjpath }`, 'docx_tmp/word/_rels/document.xml.rels', xmlbuilder.buildObject(refxml)));
+    await writeFile(path.join(prjpath, 'docx_tmp/word/_rels/document.xml.rels', xmlbuilder.buildObject(refxml)));
 
     const embed = {
         imagenes: {},

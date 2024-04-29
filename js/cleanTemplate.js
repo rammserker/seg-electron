@@ -2,7 +2,7 @@ const { readFile, writeFile } = require('fs/promises'),
     Parser = require('./utils/parser.js');
 
 // const Parser = require('./utils/parser.js');
-const tplpath = process.argv[2] ?? 'tmp/docx/word/document.xml';
+const cmd_tplpath = process.argv[2] ?? 'tmp/docx/word/document.xml';
 
 function esbloque (str)
 {
@@ -13,7 +13,7 @@ function esbloque (str)
 }
 
 // async function cleanTemplate (tplpath)
-async function cleanTemplate ()
+async function cleanTemplate (tplpath)
 {
     const datafile = await readFile(tplpath);
 
@@ -280,6 +280,7 @@ async function cleanTemplate ()
             ccap = 0,
             bcap = '';
 
+        /*
         pcap = caption.indexOf('ARABIC');
         pcap = caption.indexOf('<w:t>', pcap) + 5;
 
@@ -293,8 +294,10 @@ async function cleanTemplate ()
 
         ccap = caption.indexOf('</w:t>', pcap);
         bcap += caption.substring(ccap);
+        */
 
-        btabla += bcap; 
+        // btabla += bcap; 
+        btabla += caption; 
 
         await writeFile(`tmp/tables/${ tid }.tpl`, btabla);
         // await writeFile(`tmp/tables/${ tid }.tpl`, tabla);
@@ -320,8 +323,7 @@ async function cleanTemplate ()
 if (require.main === module)
 {
     console.log('Llamado directamente');
-    // cleanTemplate(tplpath);
-    cleanTemplate();
+    cleanTemplate(cmd_tplpath);
 }
 else
 {

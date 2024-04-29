@@ -135,7 +135,7 @@ async function handleCrearTemplate (evt, tplpath)
     //      - project/docx_tmp
     //      - project/template/tables
     // 3) Copiar archivo docx de template en tmp/docx
-    // 4) Exraer tmp/docx/{template}.docx en el lugar
+    // 4) Extraer tmp/docx/{template}.docx en el lugar
     // 5) Borrar tmp/docx/{template}.docx
     // 6) En la raíz, ejecutar `node cleanTemplate.js`
     // 7) Renombrar tmp/docx/word/document_clean.xml a document.xml
