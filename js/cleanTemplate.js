@@ -2,7 +2,7 @@ const { readFile, writeFile } = require('fs/promises'),
     Parser = require('./utils/parser.js');
 
 // const Parser = require('./utils/parser.js');
-const cmd_tplpath = process.argv[2] ?? 'tmp/docx/word/document.xml';
+const tplpath = process.argv[2] ?? 'tmp/docx/word/document.xml';
 
 function esbloque (str)
 {
@@ -13,8 +13,9 @@ function esbloque (str)
 }
 
 // async function cleanTemplate (tplpath)
-async function cleanTemplate (tplpath)
+async function cleanTemplate ()
 {
+    console.log(tplpath);
     const datafile = await readFile(tplpath);
 
     let datastr = await datafile.toString();
@@ -323,7 +324,7 @@ async function cleanTemplate (tplpath)
 if (require.main === module)
 {
     console.log('Llamado directamente');
-    cleanTemplate(cmd_tplpath);
+    cleanTemplate();
 }
 else
 {
