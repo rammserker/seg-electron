@@ -3,7 +3,7 @@ const { readFile, writeFile, copyFile, access, readdir, rename } = require('fs/p
     path = require('node:path'),
     process = require('process'),
     Parser = require('./utils/parser.js'),
-    sharp = require('sharp'),
+    imgsize = require('image-size'),
     xml2js = require('xml2js'),
     { deepCopy } = require('./utils/excelutils.js');
     // hce = require('highcharts-export-server');
@@ -879,7 +879,7 @@ async function processProject (prjpath, datapath, outfile)
         const
             filepath = staticimgs.find(i => i.split('.')[0] == path),
             imagenpath = `${ staticimgpath }/${ filepath ?? 'default.png' }`,
-            metadata = await sharp(imagenpath).metadata(),
+            metadata = await imgsize(imagenpath), //.metadata(),
             ratio = metadata.width / metadata.height;
 
         console.log('>>> IMGPATH:', imagenpath);
@@ -933,7 +933,7 @@ async function processProject (prjpath, datapath, outfile)
             filepath = staticimgs.find(i => i.split('.')[0] == path),
             imagenpath = `${ staticimgpath }/${ filepath ?? 'default.png' }`,
             // imagenpath = `${ staticimgpath }/${ staticimgs.find(i => i.split('.')[0] == path) ?? 'default.png' }`,
-            metadata = await sharp(imagenpath).metadata(),
+            metadata = await imgsize(imagenpath), // .metadata(),
             ratio = metadata.width / metadata.height;
 
         console.log('>>> ENUM_IMGPATH:', imagenpath);
@@ -1031,7 +1031,7 @@ async function processProject (prjpath, datapath, outfile)
     {
         try
         {
-            metadata = await sharp(grafica.path).metadata();
+            metadata = await imgsize(grafica.path); // .metadata();
             
             let ratio = metadata.width / metadata.height,
                 width = 0,
