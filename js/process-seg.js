@@ -1084,7 +1084,7 @@ async function processProject (prjpath, datapath, outfile)
         refstr = await reffile.toString(),
         refxml = await xmlparser.parseStringPromise(refstr);
 
-    console.log('Imagenes', tmpimagenes.length);
+    console.log('TmpImages cant:', tmpimagenes.length);
 
     for (const img of tmpimagenes)
     {
@@ -1097,6 +1097,8 @@ async function processProject (prjpath, datapath, outfile)
         });
     }
 
+    console.log('EnumImages cant:', tmpenumimg.length);
+
     for (const img of tmpenumimg)
     {
         refxml.Relationships.Relationship.push({
@@ -1107,6 +1109,8 @@ async function processProject (prjpath, datapath, outfile)
             }
         });
     }
+
+    console.log('TmpGraficas cant:', tmpgraficas.length);
 
     for (const img of tmpgraficas)
     {
@@ -1119,7 +1123,7 @@ async function processProject (prjpath, datapath, outfile)
         });
     }
 
-    await writeFile(path.join(prjpath, 'docx_tmp/word/_rels/document.xml.rels', xmlbuilder.buildObject(refxml)));
+    await writeFile(path.join(prjpath, 'docx_tmp/word/_rels/document.xml.rels'), xmlbuilder.buildObject(refxml));
 
     const embed = {
         imagenes: {},
