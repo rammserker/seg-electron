@@ -159,7 +159,7 @@ async function parseData (filepath)
                 consumo: 'Lighting!R3',
                 porcentaje: 'Lighting!R4',
                 tabla: `getLista([
-                    'C','E','G','I','L','R'
+                    'C','E','G','I','M','R'
                 ], 'Lighting!C8:R95', {
                     pack: val => val[0] != null
                 })`,
