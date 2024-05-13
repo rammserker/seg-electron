@@ -1,1 +1,2 @@
-npm install
+git pull;
+npm install;
