@@ -44,11 +44,11 @@ function processModel (model /*Object*/)
 
 function parseFecha (fecha, long = false)
 {
-    return [...fecha.toLocaleString('es-UY', {
+    return [...fecha.toLocaleString('en-US', {
         timeZone: 'UTC',
         year: 'numeric',
         month: long ? 'long' : 'short'
-    }).replace('.', '')].map((c, i) => i == 0 ? c.toUpperCase() : c).join('');
+    }); //.replace('.', '')].map((c, i) => i == 0 ? c.toUpperCase() : c).join('');
 }
             
 /**** Proceso *********************************************/
