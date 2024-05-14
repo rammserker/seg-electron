@@ -48,7 +48,7 @@ function parseFecha (fecha, long = false)
         timeZone: 'UTC',
         year: 'numeric',
         month: long ? 'long' : 'short'
-    }); //.replace('.', '')].map((c, i) => i == 0 ? c.toUpperCase() : c).join('');
+    })]; //.replace('.', '')].map((c, i) => i == 0 ? c.toUpperCase() : c).join('');
 }
             
 /**** Proceso *********************************************/
@@ -167,9 +167,9 @@ async function parseData (filepath)
             split_ac: {
                 is_present: 'Balance!G15',
                 tabla: `getLista([
-                    'C','D','E','F','G','H', 'I', 'J', 'Q', 'U'
+                    'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'Q', 'U'
                 ], 'AC!C10:U95', {
-                    pack: val => val[3]?.trim().toLowerCase() == 'split'
+                    pack: val => val[2]?.trim().toLowerCase() == 'ac'
                 })`,
                 qty: 0,
                 consumo: 'AC!U4',
@@ -179,9 +179,9 @@ async function parseData (filepath)
             central_ac: {
                 is_present: 'Balance!G16',
                 tabla: `getLista([
-                    'C','D','E','F','G','H', 'I', 'J', 'Q', 'U'
+                    'D', 'E', 'F', 'G', 'H', 'I', 'J', 'Q', 'U'
                 ], 'AC!C10:U95', {
-                    pack: val => val[2]?.trim().toLowerCase() == 'central ac'
+                    pack: val => val[1]?.trim().toLowerCase() == 'central ac'
                 })`,
                 hour_load: `getLista([
                     'N','Q'
@@ -244,6 +244,11 @@ async function parseData (filepath)
                 qty: 0,
                 cons_kwh: 'Ventilation!U3',
                 porcentaje: 'Ventilation!U4'
+            },
+            equipment: {
+                is_present: 'Balance!G5',
+                cons_kwh: 'Balance!G5',
+                porcentaje: 'Balance!H5',
             },
         },
         medidas: {
