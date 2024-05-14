@@ -294,10 +294,12 @@ async function parseData (filepath)
     resultado.usos.split_ac.porcentaje *= resultado.usos.split_ac.consumo / resultado.usos.split_ac.cons_tot;
 
     // Central AC
-    resultado.usos.central_ac.out_models = resultado.usos.central_ac.tabla?.filter(v => v[3]?.toLowerCase().trim() == 'outdoor unit' && !!v[4]).map(v => v[4]) ?? [];
+    resultado.usos.central_ac.out_models = resultado.usos.central_ac.tabla?.filter(v => v[2]?.toLowerCase().trim() == 'outdoor unit' && !!v[3]).map(v => v[3]).filter((v, i, self) => self.indexOf(v) === i) ?? [];
     resultado.usos.central_ac.outdoor_qty = resultado.usos.central_ac.out_models.length;
-    resultado.usos.central_ac.han_models = resultado.usos.central_ac.tabla?.filter(v => v[3]?.toLowerCase().trim() == 'air handler' && !!v[4]).map(v => v[4]) ?? [];
+
+    resultado.usos.central_ac.han_models = resultado.usos.central_ac.tabla?.filter(v => v[2]?.toLowerCase().trim() == 'air handler' && !!v[3]).map(v => v[3]).filter((v, i, self) => self.indexOf(v) === i) ?? [];
     resultado.usos.central_ac.handler_qty = resultado.usos.central_ac.han_models.length;
+
     resultado.usos.central_ac.hours_day = resultado.usos.central_ac?.hour_load.reduce((acc, val) => val[0] > acc ? val[0] : acc, 0) ?? 0;
     resultado.usos.central_ac.load = resultado.usos.central_ac?.hour_load.reduce((acc, val) => val[1] > acc ? val[1] : acc, 0) ?? 0;
     resultado.usos.central_ac.porcentaje *= resultado.usos.central_ac.consumo / resultado.usos.central_ac.cons_tot;
