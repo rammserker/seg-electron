@@ -294,11 +294,13 @@ async function parseData (filepath)
     resultado.usos.split_ac.porcentaje *= resultado.usos.split_ac.consumo / resultado.usos.split_ac.cons_tot;
 
     // Central AC
-    resultado.usos.central_ac.out_models = resultado.usos.central_ac.tabla?.filter(v => v[2]?.toLowerCase().trim() == 'outdoor unit' && !!v[3]).map(v => v[3]).filter((v, i, self) => self.indexOf(v) === i) ?? [];
-    resultado.usos.central_ac.outdoor_qty = resultado.usos.central_ac.out_models.length;
+    const outs = resultado.usos.central_ac.tabla?.filter(v => v[2]?.toLowerCase().trim() == 'outdoor unit');
+    resultado.usos.central_ac.out_models = outs.filter(v => !!v[3]).map(v => (v[3] + "").trim()).filter((v, i, self) => self.indexOf(v) === i) ?? [];
+    resultado.usos.central_ac.outdoor_qty = outs.reduce((acc, val) => acc + val[4], 0);
 
-    resultado.usos.central_ac.han_models = resultado.usos.central_ac.tabla?.filter(v => v[2]?.toLowerCase().trim() == 'air handler' && !!v[3]).map(v => v[3]).filter((v, i, self) => self.indexOf(v) === i) ?? [];
-    resultado.usos.central_ac.handler_qty = resultado.usos.central_ac.han_models.length;
+    const hans = resultado.usos.central_ac.tabla?.filter(v => v[2]?.toLowerCase().trim() == 'air handler'); 
+    resultado.usos.central_ac.han_models = hans.filter(v => !!v[3]).map(v => (v[3] + "").trim()).filter((v, i, self) => self.indexOf(v) === i) ?? [];
+    resultado.usos.central_ac.handler_qty = hans.reduce((acc, val) => acc + val[4], 0);
 
     resultado.usos.central_ac.hours_day = resultado.usos.central_ac?.hour_load.reduce((acc, val) => val[0] > acc ? val[0] : acc, 0) ?? 0;
     resultado.usos.central_ac.load = resultado.usos.central_ac?.hour_load.reduce((acc, val) => val[1] > acc ? val[1] : acc, 0) ?? 0;
