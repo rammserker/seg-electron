@@ -1,5 +1,6 @@
 const
     process = require('process'),
+    path = require('node:path'),
     out     = {},
     { readFile, writeFile } = require('fs/promises');
 
@@ -10,7 +11,9 @@ const {
     getVisible, getWSNames
     } = require('./utils/excelutils.js');
 
-function processModel (model /*Object*/)
+const logpath = path.join(__dirname, '../log/data-parser.log');
+
+async function processModel (model /*Object*/)
 {
     let retorno = Array.isArray(model) ? [] : {};
 
@@ -29,12 +32,13 @@ function processModel (model /*Object*/)
                 }
                 else
                 {
+                    await writeFile(logpath, `${ campo } = addressToValue( ${ val } )\n`, { flag: 'a' });
                     retorno[ campo ] = addressToValue( val );
                 }
             }
             else
             {
-                retorno[ campo ] = processModel( val );
+                retorno[ campo ] = await processModel( val );
             }
         }
     }
@@ -260,12 +264,41 @@ async function parseData (filepath)
         pv: {
             is_present: 'PV assessment!H7',
         },
+        pvpotential: {
+            is_present: 'PV assessment!F49',
+            total_kwp: 'PV assessment!F49',
+            total_kwh: 'PV assessment!F50',
+            coverage: 'PV assessment!F51',
+            roof_horiz: {
+                area: 'PV assessment!E7',
+                pot_kwp: 'PV assessment!E10',
+                prod_kwh: 'PV assessment!E11',
+            },
+            roof_slope: {
+                area: 'PV assessment!E16',
+                pot_kwp: 'PV assessment!E19',
+                prod_kwh: 'PV assessment!E20',
+            },
+            parking: {
+                area: 'PV assessment!E25',
+                pot_kwp: 'PV assessment!E28',
+                prod_kwh: 'PV assessment!E29',
+            },
+            ground: {
+                area: 'PV assessment!E34',
+                pot_kwp: 'PV assessment!E37',
+                prod_kwh: 'PV assessment!E38',
+            },
+        },
     };
 
     // debug
     // getWSNames();
 
-    let resultado = processModel( modelo );
+    await writeFile(logpath, "Antes de process\n", { flag: 'a' });
+
+    let resultado = await processModel( modelo );
+    await writeFile(logpath, "Post de process\n", { flag: 'a' });
 
     ////////////////////////////
     // Procesamientos extra
@@ -274,10 +307,14 @@ async function parseData (filepath)
     // Campos calculados de edificio
     resultado.edificio.indicador = resultado.totales.cons_tot / resultado.edificio.superficie;
 
+    // await writeFile(logpath, "Antes de consumos edificios\n", { flag: 'a' });
+
     // ¿Hay varios consumos, más que electricidad?
     resultado.edificio.consumos = ['electricity', 'LPG', 'diesel'].filter(
-        c => !!resultado.energeticos[ c.toLowerCase() ].consumos?.meses?.length
+        c => !!resultado.energeticos[ c?.toLowerCase() ].consumos?.meses?.length
     );
+    
+    // await writeFile(logpath, "Post de consumos edificios\n", { flag: 'a' });
 
     resultado.energeticos.hay_varios = resultado.edificio.consumos.filter(c => c != 'electricity').length > 0;
 

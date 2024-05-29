@@ -4,3 +4,4 @@ js/app.js
 project/docx_tmp/
 package-lock.json
 default/*
+*.log
