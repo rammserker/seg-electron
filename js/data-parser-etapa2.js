@@ -48,11 +48,11 @@ async function processModel (model /*Object*/)
 
 function parseFecha (fecha, long = false)
 {
-    return [...fecha.toLocaleString('en-US', {
+    return fecha.toLocaleString('en-US', {
         timeZone: 'UTC',
         year: 'numeric',
         month: long ? 'long' : 'short'
-    })]; //.replace('.', '')].map((c, i) => i == 0 ? c.toUpperCase() : c).join('');
+    }); //.replace('.', '')].map((c, i) => i == 0 ? c.toUpperCase() : c).join('');
 }
             
 /**** Proceso *********************************************/
@@ -163,7 +163,7 @@ async function parseData (filepath)
                 consumo: 'Lighting!R3',
                 porcentaje: 'Lighting!R4',
                 tabla: `getLista([
-                    'C','E','G','I','M','R'
+                    'C','E','I','J','M','S'
                 ], 'Lighting!C8:R95', {
                     pack: val => val[0] != null
                 })`,
@@ -269,6 +269,7 @@ async function parseData (filepath)
             total_kwp: 'PV assessment!F49',
             total_kwh: 'PV assessment!F50',
             coverage: 'PV assessment!F51',
+            anual_kwh: 'PV assessment!F47',
             roof_horiz: {
                 area: 'PV assessment!E7',
                 pot_kwp: 'PV assessment!E10',
